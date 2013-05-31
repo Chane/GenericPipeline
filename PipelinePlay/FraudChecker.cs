@@ -74,11 +74,7 @@
 
         public bool RunRules()
         {
-            this.CountOfRulesRan = 0;
-            this.CountOfRulesPassed = 0;
-            this.ReportOfPassingRules.Clear();
-            this.ReportOfFailingRules.Clear();
-
+            this.ResetState();
             if (!this.IsRulesLoaded)
             {
                 LoadRules();
@@ -103,10 +99,25 @@
             return this.CountOfRulesFailed == 0;
         }
 
+        public void LoadOrder(IDummyOrderObject newOrder)
+        {
+            this.order = newOrder;
+            this.ResetState();
+        }
+
         private void LoadRepository()
         {
             this.repository = new FraudRepository();
             this.IsRepositoryLoaded = true;
+        }
+
+        private void ResetState()
+        {
+            this.CountOfRulesRan = 0;
+            this.CountOfRulesFailed = 0;
+            this.CountOfRulesPassed = 0;
+            this.ReportOfPassingRules.Clear();
+            this.ReportOfFailingRules.Clear();
         }
     }
 }

@@ -197,5 +197,26 @@
             var checker = new FraudChecker(mockOrder.Object, mockRepo.Object);
             Assert.IsFalse(checker.RunRules());
         }
+
+        [TestMethod]
+        public void TestReusability()
+        {
+            var mockRepo = new Mock<IFraudRepository>();
+            var mockOrder = new Mock<IDummyOrderObject>();
+            var mockRuleFailing = RuleGenerators.FetchMockedRule(true);
+
+            mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IFraudRule> { mockRuleFailing.Object });
+
+            var checker = new FraudChecker(mockOrder.Object, mockRepo.Object);
+            checker.RunRules();
+        
+            var mockOrder2 = new Mock<IDummyOrderObject>();
+            checker.LoadOrder(mockOrder2.Object);
+            Assert.AreEqual(0, checker.CountOfRulesFailed);
+            Assert.AreEqual(0, checker.CountOfRulesPassed);
+            Assert.AreEqual(0, checker.CountOfRulesRan);
+            Assert.AreEqual(0, checker.ReportOfFailingRules.Count);
+            Assert.AreEqual(0, checker.ReportOfPassingRules.Count);
+        }
     }
 }
