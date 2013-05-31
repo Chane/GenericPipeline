@@ -72,7 +72,7 @@
             this.IsRulesLoaded = true;
         }
 
-        public void RunRules()
+        public bool RunRules()
         {
             this.CountOfRulesRan = 0;
             this.CountOfRulesPassed = 0;
@@ -99,6 +99,8 @@
                     this.ReportOfPassingRules.Add(rule.Name);
                 }
             }
+
+            return this.CountOfRulesFailed == 0;
         }
 
         private void LoadRepository()

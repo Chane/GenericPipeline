@@ -171,5 +171,31 @@
 
             Assert.IsTrue(checker.IsRulesLoaded);
         }
+
+        [TestMethod]
+        public void TestFraudCheckerReturnsPassResult()
+        {
+            var mockRepo = new Mock<IFraudRepository>();
+            var mockOrder = new Mock<IDummyOrderObject>();
+            var mockRulePassing = RuleGenerators.FetchMockedRule(false);
+
+            mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IFraudRule> { mockRulePassing.Object });
+
+            var checker = new FraudChecker(mockOrder.Object, mockRepo.Object);
+            Assert.IsTrue(checker.RunRules());
+        }
+
+        [TestMethod]
+        public void TestFraudCheckerReturnsFailResult()
+        {
+            var mockRepo = new Mock<IFraudRepository>();
+            var mockOrder = new Mock<IDummyOrderObject>();
+            var mockRuleFailing = RuleGenerators.FetchMockedRule(true);
+
+            mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IFraudRule> { mockRuleFailing.Object });
+
+            var checker = new FraudChecker(mockOrder.Object, mockRepo.Object);
+            Assert.IsFalse(checker.RunRules());
+        }
     }
 }
