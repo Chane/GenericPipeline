@@ -57,7 +57,6 @@
             if (!this.IsRepositoryLoaded)
             {
                 LoadRepository();
-                
             }
 
             if (string.IsNullOrWhiteSpace(this.channelKey))
@@ -72,7 +71,7 @@
             this.IsRulesLoaded = true;
         }
 
-        public bool RunRules()
+        public ICheckResult RunRules()
         {
             this.ResetState();
             if (!this.IsRulesLoaded)
@@ -96,7 +95,8 @@
                 }
             }
 
-            return this.CountOfRulesFailed == 0;
+            var result = this.CountOfRulesFailed == 0;
+            return new CheckResult(result, this.CountOfRulesRan, this.CountOfRulesPassed, this.CountOfRulesFailed, this.ReportOfPassingRules, this.ReportOfFailingRules);
         }
 
         public void LoadOrder(IDummyOrderObject newOrder)

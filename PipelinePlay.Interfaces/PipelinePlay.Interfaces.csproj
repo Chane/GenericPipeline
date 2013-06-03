@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ICheckResult.cs" />
     <Compile Include="IDummyOrderObject.cs" />
     <Compile Include="IFraudRule.cs" />
     <Compile Include="IFraudRepository.cs" />

@@ -61,6 +61,7 @@
     <Compile Include="Helpers\RuleGenerators.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleTests\BaseRuleTests.cs" />
+    <Compile Include="FraudCheckerBulkProcessorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PipelinePlay.Interfaces\PipelinePlay.Interfaces.csproj">
