@@ -5,6 +5,7 @@
     public interface IFraudRepository
     {
         IList<IFraudRule> FetchAllRules();
+
         IList<IFraudRule> FetchRulesByChannel(string channel);
     }
 }

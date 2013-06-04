@@ -11,7 +11,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PipelinePlay.Rules.BaseRule">
-    <Position X="5" Y="2.5" Width="1.5" />
+    <Position X="5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rules\BaseRule.cs</FileName>
@@ -19,10 +19,18 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PipelinePlay.FraudRepository">
-    <Position X="3" Y="2.5" Width="1.75" />
+    <Position X="3" Y="2" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>FraudRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PipelinePlay.CheckResult" Collapsed="true">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABACAEAAAAAAAEAAIEAAAAAA=</HashCode>
+      <FileName>CheckResult.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -35,7 +43,11 @@
     <TypeIdentifier />
   </Interface>
   <Interface Name="PipelinePlay.Interfaces.IRuleValidationResult">
-    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="PipelinePlay.Interfaces.ICheckResult">
+    <Position X="6.75" Y="2" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Segoe UI" Size="9" />

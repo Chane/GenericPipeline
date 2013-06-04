@@ -38,45 +38,26 @@
             this.IsRepositoryLoaded = true;
         }
 
-        public bool IsRulesLoaded { get; private set; }
+        internal bool IsRulesLoaded { get; private set; }
 
-        public bool IsRepositoryLoaded { get; private set; }
+        internal bool IsRepositoryLoaded { get; private set; }
 
-        public int CountOfRulesRan { get; private set; }
+        internal int CountOfRulesRan { get; private set; }
 
-        public int CountOfRulesPassed { get; private set; }
+        internal int CountOfRulesPassed { get; private set; }
 
-        public int CountOfRulesFailed { get; private set; }
+        internal int CountOfRulesFailed { get; private set; }
 
-        public IList<string> ReportOfPassingRules { get; private set; }
+        internal IList<string> ReportOfPassingRules { get; private set; }
 
-        public IDictionary<string, string> ReportOfFailingRules { get; private set; }
-
-        public void LoadRules()
-        {
-            if (!this.IsRepositoryLoaded)
-            {
-                LoadRepository();
-            }
-
-            if (string.IsNullOrWhiteSpace(this.channelKey))
-            {
-                this.rules = this.repository.FetchAllRules();
-            }
-            else
-            {
-                this.rules = this.repository.FetchRulesByChannel(this.channelKey);
-            }
-
-            this.IsRulesLoaded = true;
-        }
+        internal IDictionary<string, string> ReportOfFailingRules { get; private set; }
 
         public ICheckResult RunRules()
         {
             this.ResetState();
             if (!this.IsRulesLoaded)
             {
-                LoadRules();
+                this.LoadRules();
             }
 
             foreach (var rule in this.rules)
@@ -103,6 +84,25 @@
         {
             this.order = newOrder;
             this.ResetState();
+        }
+
+        internal void LoadRules()
+        {
+            if (!this.IsRepositoryLoaded)
+            {
+                this.LoadRepository();
+            }
+
+            if (string.IsNullOrWhiteSpace(this.channelKey))
+            {
+                this.rules = this.repository.FetchAllRules();
+            }
+            else
+            {
+                this.rules = this.repository.FetchRulesByChannel(this.channelKey);
+            }
+
+            this.IsRulesLoaded = true;
         }
 
         private void LoadRepository()
