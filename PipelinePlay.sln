@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30516.212
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelinePlay", "PipelinePlay\PipelinePlay.csproj", "{15497A1D-5357-4251-B613-FD56BDE03CFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelinePlay.UnitTests", "PipelinePlay.UnitTests\PipelinePlay.UnitTests.csproj", "{13D1AEC7-B18D-4D7F-B3AC-8D512653C6CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelinePlay.Interfaces", "PipelinePlay.Interfaces\PipelinePlay.Interfaces.csproj", "{E2C07322-2AB7-4C3C-B7F2-08DE87115C47}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{42A0E982-32DE-4602-9F44-8DBC526F5918}"
-	ProjectSection(SolutionItems) = preProject
-		PipeLine.ruleset = PipeLine.ruleset
-		Settings.StyleCop = Settings.StyleCop
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EBB17A6-4F4A-49B1-BED4-67CB795B88BE}
 	EndGlobalSection
 EndGlobal

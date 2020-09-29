@@ -2,15 +2,15 @@
 {
     using System.Collections.Generic;
     using System.Globalization;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using NUnit.Framework;
     using PipelinePlay.Interfaces;
     using PipelinePlay.UnitTests.Helpers;
 
-    [TestClass]
+    [TestFixture]
     public class FraudCheckerBulkProcessorTests
     {
-        [TestMethod]
+        [Test]
         public void IntegrationTestProcessBatch()
         {
             var orders = new List<IDummyOrderObject>();

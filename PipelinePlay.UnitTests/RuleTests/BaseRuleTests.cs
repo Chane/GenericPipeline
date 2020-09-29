@@ -1,13 +1,13 @@
 ﻿namespace PipelinePlay.UnitTests.RuleTests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using NUnit.Framework;
     using PipelinePlay.Rules;
 
-    [TestClass]
+    [TestFixture]
     public class BaseRuleTests
     {
-        [TestMethod]
+        [Test]
         public void TestBaseRule()
         {
             // Instantiate the abstract class as a mock to allow testing

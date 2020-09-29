@@ -2,15 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using NUnit.Framework;
     using PipelinePlay.Interfaces;
     using PipelinePlay.UnitTests.Helpers;
 
-    [TestClass]
+    [TestFixture]
     public class FraudCheckerTests
     {
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerLoadState()
         {
             var mockOrder = new Mock<IDummyOrderObject>();
@@ -18,7 +18,7 @@
             Assert.IsFalse(checker.IsRulesLoaded);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanLoadRepository()
         {
             var mockRepo = Mock.Of<IFraudRepository>();
@@ -29,7 +29,7 @@
             Assert.IsFalse(checker.IsRulesLoaded);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanRunRule()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -43,7 +43,7 @@
             Assert.AreEqual(1, checker.CountOfRulesRan);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanRunRuleViaReport()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -57,7 +57,7 @@
             Assert.AreEqual(1, report.RulesRan);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanRunRules()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -72,7 +72,7 @@
             Assert.AreEqual(2, checker.CountOfRulesRan);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanRunRulesViaReport()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -87,7 +87,7 @@
             Assert.AreEqual(2, report.RulesRan);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanPassRule()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -103,7 +103,7 @@
             Assert.AreEqual(1, checker.CountOfRulesPassed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanPassRuleViaReport()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -121,7 +121,7 @@
             Assert.AreEqual(report.RulesPassed, checker.CountOfRulesPassed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanFailRule()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -137,7 +137,7 @@
             Assert.AreEqual(0, checker.CountOfRulesPassed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanFailRuleViaReport()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -155,7 +155,7 @@
             Assert.AreEqual(report.RulesPassed, checker.CountOfRulesPassed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanPassAndFailRule()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -172,7 +172,7 @@
             Assert.AreEqual(1, checker.CountOfRulesPassed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerCanPassAndFailRuleViaReport()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -191,7 +191,7 @@
             Assert.AreEqual(report.RulesPassed, checker.CountOfRulesPassed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerStoresPassingRuleNames()
         {
             var name = "ruleName";
@@ -207,7 +207,7 @@
             Assert.IsTrue(checker.ReportOfPassingRules.Contains(name));
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerStoresPassingRuleNamesViaReport()
         {
             var name = "ruleName";
@@ -223,7 +223,7 @@
             Assert.IsTrue(report.ReportOfPassingRules.Contains(name));
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerStoresFailingRuleNames()
         {
             var name = "ruleName";
@@ -239,7 +239,7 @@
             Assert.IsTrue(checker.ReportOfFailingRules.ContainsKey(name));
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerStoresFailingRuleNamesViaReport()
         {
             var name = "ruleName";
@@ -255,7 +255,7 @@
             Assert.IsTrue(report.ReportOfFailingRules.ContainsKey(name));
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerStoresFailingRuleMessages()
         {
             var name = "ruleName";
@@ -272,7 +272,7 @@
             Assert.AreEqual(message, checker.ReportOfFailingRules[name]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerStoresFailingRuleMessagesViaReport()
         {
             var name = "ruleName";
@@ -289,7 +289,7 @@
             Assert.AreEqual(message, report.ReportOfFailingRules[name]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerUsesChannelKey()
         {
             var channelKey = "abc";
@@ -305,7 +305,7 @@
             Assert.IsTrue(checker.IsRulesLoaded);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerReturnsPassResult()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -319,7 +319,7 @@
             Assert.IsTrue(report.OverallResult);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFraudCheckerReturnsFailResult()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -333,7 +333,7 @@
             Assert.IsFalse(report.OverallResult);
         }
 
-        [TestMethod]
+        [Test]
         public void TestReusability()
         {
             var mockRepo = new Mock<IFraudRepository>();
@@ -354,7 +354,7 @@
             Assert.AreEqual(0, checker.ReportOfPassingRules.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void TestOrdersInSequence()
         {
             var mockRepo = new Mock<IFraudRepository>();
