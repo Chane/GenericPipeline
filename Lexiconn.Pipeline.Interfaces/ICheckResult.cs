@@ -1,4 +1,4 @@
-﻿namespace PipelinePlay.Interfaces
+﻿namespace Lexiconn.Pipeline.Interfaces
 {
     using System.Collections.Generic;
 

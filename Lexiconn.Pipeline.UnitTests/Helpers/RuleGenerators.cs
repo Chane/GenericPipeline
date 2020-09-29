@@ -1,7 +1,7 @@
-﻿namespace PipelinePlay.UnitTests.Helpers
+﻿namespace Lexiconn.Pipeline.UnitTests.Helpers
 {
     using Moq;
-    using PipelinePlay.Interfaces;
+    using Lexiconn.Pipeline.Interfaces;
 
     internal static class RuleGenerators
     {

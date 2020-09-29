@@ -1,8 +1,8 @@
-﻿namespace PipelinePlay.UnitTests.RuleTests
+﻿namespace Lexiconn.Pipeline.UnitTests.RuleTests
 {
     using Moq;
     using NUnit.Framework;
-    using PipelinePlay.Rules;
+    using Lexiconn.Pipeline.Rules;
 
     [TestFixture]
     public class BaseRuleTests

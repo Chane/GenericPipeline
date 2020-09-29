@@ -1,6 +1,6 @@
-﻿namespace PipelinePlay.Rules
+﻿namespace Lexiconn.Pipeline.Rules
 {
-    using PipelinePlay.Interfaces;
+    using Lexiconn.Pipeline.Interfaces;
 
     public abstract class BaseRule : IFraudRule
     {

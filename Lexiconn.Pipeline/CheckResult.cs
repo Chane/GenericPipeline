@@ -1,7 +1,7 @@
-﻿namespace PipelinePlay
+﻿namespace Lexiconn.Pipeline
 {
     using System.Collections.Generic;
-    using PipelinePlay.Interfaces;
+    using Lexiconn.Pipeline.Interfaces;
 
     public class CheckResult : ICheckResult
     {

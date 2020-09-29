@@ -1,11 +1,11 @@
-﻿namespace PipelinePlay
+﻿namespace Lexiconn.Pipeline
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using PipelinePlay.Interfaces;
+    using Lexiconn.Pipeline.Interfaces;
 
     public class FraudCheckerBulkProcessor
     {

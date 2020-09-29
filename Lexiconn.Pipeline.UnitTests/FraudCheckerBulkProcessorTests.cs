@@ -1,11 +1,11 @@
-﻿namespace PipelinePlay.UnitTests
+﻿namespace Lexiconn.Pipeline.UnitTests
 {
     using System.Collections.Generic;
     using System.Globalization;
     using Moq;
     using NUnit.Framework;
-    using PipelinePlay.Interfaces;
-    using PipelinePlay.UnitTests.Helpers;
+    using Lexiconn.Pipeline.Interfaces;
+    using Lexiconn.Pipeline.UnitTests.Helpers;
 
     [TestFixture]
     public class FraudCheckerBulkProcessorTests
