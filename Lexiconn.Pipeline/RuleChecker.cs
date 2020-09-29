@@ -3,17 +3,17 @@
     using System.Collections.Generic;
     using Lexiconn.Pipeline.Interfaces;
 
-    public class FraudChecker
+    public class RuleChecker
     {
-        private IList<IFraudRule> rules;
+        private IList<IRule> rules;
 
-        private IFraudRepository repository;
+        private IRepository repository;
 
-        private IDummyOrderObject order;
+        private ICheckableObject order;
 
         private string channelKey;
 
-        public FraudChecker(IDummyOrderObject order)
+        public RuleChecker(ICheckableObject order)
         {
             this.IsRulesLoaded = false;
             this.ReportOfPassingRules = new List<string>();
@@ -21,18 +21,18 @@
             this.order = order;
         }
 
-        public FraudChecker(IDummyOrderObject order, string channelKey) : this(order)
+        public RuleChecker(ICheckableObject order, string channelKey) : this(order)
         {
             this.channelKey = channelKey;
         }
 
-        public FraudChecker(IDummyOrderObject order, IFraudRepository repository) : this(order)
+        public RuleChecker(ICheckableObject order, IRepository repository) : this(order)
         {
             this.repository = repository;
             this.IsRepositoryLoaded = true;
         }
 
-        public FraudChecker(IDummyOrderObject order, IFraudRepository repository, string channelKey) : this(order, channelKey)
+        public RuleChecker(ICheckableObject order, IRepository repository, string channelKey) : this(order, channelKey)
         {
             this.repository = repository;
             this.IsRepositoryLoaded = true;
@@ -80,7 +80,7 @@
             return new CheckResult(result, this.CountOfRulesRan, this.CountOfRulesPassed, this.CountOfRulesFailed, this.ReportOfPassingRules, this.ReportOfFailingRules);
         }
 
-        public void LoadOrder(IDummyOrderObject newOrder)
+        public void LoadOrder(ICheckableObject newOrder)
         {
             this.order = newOrder;
             this.ResetState();
@@ -88,27 +88,16 @@
 
         public void LoadRules()
         {
-            if (!this.IsRepositoryLoaded)
-            {
-                this.LoadRepository();
-            }
-
             if (string.IsNullOrWhiteSpace(this.channelKey))
             {
                 this.rules = this.repository.FetchAllRules();
             }
             else
             {
-                this.rules = this.repository.FetchRulesByChannel(this.channelKey);
+                this.rules = this.repository.FetchRulesByFilter(this.channelKey);
             }
 
             this.IsRulesLoaded = true;
-        }
-
-        private void LoadRepository()
-        {
-            this.repository = new FraudRepository();
-            this.IsRepositoryLoaded = true;
         }
 
         private void ResetState()

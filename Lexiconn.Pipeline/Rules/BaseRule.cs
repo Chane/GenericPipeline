@@ -2,7 +2,7 @@
 {
     using Lexiconn.Pipeline.Interfaces;
 
-    public abstract class BaseRule : IFraudRule
+    public abstract class BaseRule : IRule
     {
         protected BaseRule(string name)
         {
@@ -11,6 +11,6 @@
 
         public string Name { get; set; }
 
-        public abstract IRuleValidationResult ValidateRule(IDummyOrderObject order);
+        public abstract IRuleValidationResult ValidateRule(ICheckableObject order);
     }
 }

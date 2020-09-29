@@ -8,32 +8,32 @@
     using Lexiconn.Pipeline.UnitTests.Helpers;
 
     [TestFixture]
-    public class FraudCheckerBulkProcessorTests
+    public class BulkRuleProcessorTests
     {
         [Test]
         public void IntegrationTestProcessBatch()
         {
-            var orders = new List<IDummyOrderObject>();
+            var orders = new List<ICheckableObject>();
             for (var i = 0; i < 6; i++)
             {
-                var order = new Mock<IDummyOrderObject>();
-                order.Setup(s => s.OrderNumber).Returns(i.ToString(CultureInfo.InvariantCulture));
+                var order = new Mock<ICheckableObject>();
+                order.Setup(s => s.Id).Returns(i.ToString(CultureInfo.InvariantCulture));
                 orders.Add(order.Object);
             }
 
-            var repo = new Mock<IFraudRepository>();
+            var repo = new Mock<IRepository>();
             var mockRuleFailing = RuleGenerators.FetchMockedRule(true);
             var mockRulePassing = RuleGenerators.FetchMockedRule(false);
             repo
                 .SetupSequence(m => m.FetchAllRules())
-                .Returns(new List<IFraudRule> { mockRuleFailing.Object })
-                .Returns(new List<IFraudRule> { mockRulePassing.Object })
-                .Returns(new List<IFraudRule> { mockRuleFailing.Object })
-                .Returns(new List<IFraudRule> { mockRulePassing.Object })
-                .Returns(new List<IFraudRule> { mockRuleFailing.Object })
-                .Returns(new List<IFraudRule> { mockRulePassing.Object });
+                .Returns(new List<IRule> { mockRuleFailing.Object })
+                .Returns(new List<IRule> { mockRulePassing.Object })
+                .Returns(new List<IRule> { mockRuleFailing.Object })
+                .Returns(new List<IRule> { mockRulePassing.Object })
+                .Returns(new List<IRule> { mockRuleFailing.Object })
+                .Returns(new List<IRule> { mockRulePassing.Object });
 
-            var bulkProcessor = new FraudCheckerBulkProcessor(repo.Object);
+            var bulkProcessor = new BulkRuleProcessor(repo.Object);
             var report = bulkProcessor.ProcessBatch(orders);
 
             Assert.AreEqual(6, report.Count);
