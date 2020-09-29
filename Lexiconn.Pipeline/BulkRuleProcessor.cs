@@ -7,23 +7,23 @@
     {
         private IRepository repository;
 
-        public BulkRuleProcessor(IRepository specificRepository)
+        public BulkRuleProcessor(IRepository repository)
         {
-            this.repository = specificRepository;
+            this.repository = repository;
         }
 
-        public IDictionary<string, ICheckResult> ProcessBatch(IList<ICheckableObject> orders)
+        public IDictionary<string, ICheckResult> ProcessBatch(IList<ICheckableObject> batch)
         {
-            if (orders == null || orders.Count == 0)
+            if (batch == null || batch.Count == 0)
             {
                 return null;
             }
 
             var results = new Dictionary<string, ICheckResult>();
-            foreach (var order in orders)
+            foreach (var item in batch)
             {
-                var checker = new RuleChecker(order, this.repository);
-                results.Add(order.Id, checker.RunRules());
+                var checker = new RuleChecker(item, this.repository);
+                results.Add(item.Id, checker.RunRules());
             }
 
             return results;

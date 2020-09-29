@@ -4,6 +4,6 @@
     {
         string Name { get; set; }
 
-        IRuleValidationResult ValidateRule(ICheckableObject order);
+        IRuleValidationResult ValidateRule(ICheckableObject item);
     }
 }

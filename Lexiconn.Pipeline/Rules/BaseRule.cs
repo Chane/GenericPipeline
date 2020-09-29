@@ -11,6 +11,6 @@
 
         public string Name { get; set; }
 
-        public abstract IRuleValidationResult ValidateRule(ICheckableObject order);
+        public abstract IRuleValidationResult ValidateRule(ICheckableObject item);
     }
 }
