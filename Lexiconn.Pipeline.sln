@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30516.212
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelinePlay", "PipelinePlay\PipelinePlay.csproj", "{15497A1D-5357-4251-B613-FD56BDE03CFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexiconn.Pipeline", "Lexiconn.Pipeline\Lexiconn.Pipeline.csproj", "{15497A1D-5357-4251-B613-FD56BDE03CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelinePlay.UnitTests", "PipelinePlay.UnitTests\PipelinePlay.UnitTests.csproj", "{13D1AEC7-B18D-4D7F-B3AC-8D512653C6CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexiconn.Pipeline.UnitTests", "Lexiconn.Pipeline.UnitTests\Lexiconn.Pipeline.UnitTests.csproj", "{13D1AEC7-B18D-4D7F-B3AC-8D512653C6CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelinePlay.Interfaces", "PipelinePlay.Interfaces\PipelinePlay.Interfaces.csproj", "{E2C07322-2AB7-4C3C-B7F2-08DE87115C47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexiconn.Pipeline.Interfaces", "Lexiconn.Pipeline.Interfaces\Lexiconn.Pipeline.Interfaces.csproj", "{E2C07322-2AB7-4C3C-B7F2-08DE87115C47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
