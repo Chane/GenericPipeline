@@ -14,7 +14,7 @@
         public void TestFraudCheckerLoadState()
         {
             var mockOrder = new Mock<ICheckableObject>();
-            var checker = new RuleChecker(mockOrder.Object);
+            var checker = new RuleChecker(mockOrder.Object, Mock.Of<IRepository>());
             Assert.IsFalse(checker.IsRulesLoaded);
         }
 

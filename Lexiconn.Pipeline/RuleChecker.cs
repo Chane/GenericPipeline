@@ -9,33 +9,26 @@
 
         private IRepository repository;
 
-        private ICheckableObject order;
+        private ICheckableObject itemToValidate;
 
-        private string channelKey;
+        private string filter;
 
-        public RuleChecker(ICheckableObject order)
+        public RuleChecker(ICheckableObject itemToValidate, IRepository repository, string filter)
         {
             this.IsRulesLoaded = false;
             this.ReportOfPassingRules = new List<string>();
             this.ReportOfFailingRules = new Dictionary<string, string>();
-            this.order = order;
-        }
+            this.itemToValidate = itemToValidate;
 
-        public RuleChecker(ICheckableObject order, string channelKey) : this(order)
-        {
-            this.channelKey = channelKey;
-        }
+            this.filter = filter;
 
-        public RuleChecker(ICheckableObject order, IRepository repository) : this(order)
-        {
             this.repository = repository;
             this.IsRepositoryLoaded = true;
         }
 
-        public RuleChecker(ICheckableObject order, IRepository repository, string channelKey) : this(order, channelKey)
+        public RuleChecker(ICheckableObject itemToValidate, IRepository repository)
+            : this(itemToValidate, repository, string.Empty)
         {
-            this.repository = repository;
-            this.IsRepositoryLoaded = true;
         }
 
         public bool IsRulesLoaded { get; private set; }
@@ -63,7 +56,7 @@
             foreach (var rule in this.rules)
             {
                 this.CountOfRulesRan++;
-                var validationResult = rule.ValidateRule(this.order);
+                var validationResult = rule.ValidateRule(this.itemToValidate);
                 if (validationResult.InError)
                 {
                     this.CountOfRulesFailed++;
@@ -82,19 +75,19 @@
 
         public void LoadOrder(ICheckableObject newOrder)
         {
-            this.order = newOrder;
+            this.itemToValidate = newOrder;
             this.ResetState();
         }
 
         public void LoadRules()
         {
-            if (string.IsNullOrWhiteSpace(this.channelKey))
+            if (string.IsNullOrWhiteSpace(this.filter))
             {
                 this.rules = this.repository.FetchAllRules();
             }
             else
             {
-                this.rules = this.repository.FetchRulesByFilter(this.channelKey);
+                this.rules = this.repository.FetchRulesByFilter(this.filter);
             }
 
             this.IsRulesLoaded = true;
