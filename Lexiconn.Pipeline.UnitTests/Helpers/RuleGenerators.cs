@@ -5,6 +5,16 @@
 
     internal static class RuleGenerators
     {
+        internal static Mock<IRule> FetchFailingRule()
+        {
+            return FetchMockedRule(true);
+        }
+
+        internal static Mock<IRule> FetchPassingRule()
+        {
+            return FetchMockedRule(false);
+        }
+
         internal static Mock<IRule> FetchMockedRule()
         {
             return FetchMockedRule(true);

@@ -11,7 +11,7 @@
     public class BulkRuleProcessorTests
     {
         [Test]
-        public void IntegrationTestProcessBatch()
+        public void Checkable_Objects_Can_Be_Processed_In_Batch()
         {
             var orders = new List<ICheckableObject>();
             for (var i = 0; i < 6; i++)

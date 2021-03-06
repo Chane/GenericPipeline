@@ -8,7 +8,7 @@
     public class BaseRuleTests
     {
         [Test]
-        public void TestBaseRule()
+        public void A_Rule_Has_A_Name()
         {
             // Instantiate the abstract class as a mock to allow testing
             var name = "abc";

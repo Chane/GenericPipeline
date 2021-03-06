@@ -11,7 +11,7 @@
     public class RuleCheckerTests
     {
         [Test]
-        public void TestFraudCheckerLoadState()
+        public void RuleChecker_Does_Not_Load_Rules_On_Initialisation()
         {
             var mockOrder = new Mock<ICheckableObject>();
             var checker = new RuleChecker(mockOrder.Object, Mock.Of<IRepository>());
@@ -19,7 +19,7 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanLoadRepository()
+        public void RuleChecker_Loads_Repository_On_Initialisation()
         {
             var mockRepo = Mock.Of<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
@@ -30,7 +30,7 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanRunRule()
+        public void RuleChecker_Will_Run_Rules_From_Repository()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
@@ -44,7 +44,7 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanRunRuleViaReport()
+        public void RuleChecker_Will_Return_A_Report_With_Number_Of_RulesRan()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
@@ -58,7 +58,7 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanRunRules()
+        public void RuleChecker_Will_Run_Multiple_Rules()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
@@ -73,7 +73,7 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanRunRulesViaReport()
+        public void RuleChecker_Will_Return_A_Report_With_Number_Of_RulesRan_For_Multiple_Rules()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
@@ -88,11 +88,11 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanPassRule()
+        public void Rule_Checker_Will_Count_Rules_Passed()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
-            var mockRule = RuleGenerators.FetchMockedRule(false);
+            var mockRule = RuleGenerators.FetchPassingRule();
 
             mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRule.Object });
 
@@ -104,11 +104,27 @@
         }
 
         [Test]
-        public void TestFraudCheckerCanPassRuleViaReport()
+        public void Rule_Checker_Will_Count_Rules_Failed()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
-            var mockRule = RuleGenerators.FetchMockedRule(false);
+            var mockRule = RuleGenerators.FetchPassingRule();
+
+            mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRule.Object });
+
+            var checker = new RuleChecker(mockOrder.Object, mockRepo.Object);
+            checker.RunRules();
+
+            Assert.AreEqual(1, checker.CountOfRulesFailed);
+            Assert.AreEqual(0, checker.CountOfRulesPassed);
+        }
+
+        [Test]
+        public void RuleChecker_Report_Has_Number_Of_Passes()
+        {
+            var mockRepo = new Mock<IRepository>();
+            var mockOrder = new Mock<ICheckableObject>();
+            var mockRule = RuleGenerators.FetchFailingRule();
 
             mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRule.Object });
 
@@ -122,11 +138,29 @@
         }
 
         [Test]
+        public void RuleChecker_Report_Has_Number_Of_Fails()
+        {
+            var mockRepo = new Mock<IRepository>();
+            var mockOrder = new Mock<ICheckableObject>();
+            var mockRule = RuleGenerators.FetchFailingRule();
+
+            mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRule.Object });
+
+            var checker = new RuleChecker(mockOrder.Object, mockRepo.Object);
+            var report = checker.RunRules();
+
+            Assert.AreEqual(1, report.RulesFailed);
+            Assert.AreEqual(0, report.RulesPassed);
+            Assert.AreEqual(report.RulesFailed, checker.CountOfRulesFailed);
+            Assert.AreEqual(report.RulesPassed, checker.CountOfRulesPassed);
+        }
+
+        [Test]
         public void TestFraudCheckerCanFailRule()
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
-            var mockRule = RuleGenerators.FetchMockedRule(true);
+            var mockRule = RuleGenerators.FetchFailingRule();
 
             mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRule.Object });
 
@@ -142,7 +176,7 @@
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
-            var mockRule = RuleGenerators.FetchMockedRule(true);
+            var mockRule = RuleGenerators.FetchFailingRule();
 
             mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRule.Object });
 
@@ -160,8 +194,8 @@
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
-            var mockRuleInError = RuleGenerators.FetchMockedRule(true);
-            var mockRulePassing = RuleGenerators.FetchMockedRule(false);
+            var mockRuleInError = RuleGenerators.FetchFailingRule();
+            var mockRulePassing = RuleGenerators.FetchPassingRule();
 
             mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRuleInError.Object, mockRulePassing.Object });
 
@@ -177,8 +211,8 @@
         {
             var mockRepo = new Mock<IRepository>();
             var mockOrder = new Mock<ICheckableObject>();
-            var mockRuleInError = RuleGenerators.FetchMockedRule(true);
-            var mockRulePassing = RuleGenerators.FetchMockedRule(false);
+            var mockRuleInError = RuleGenerators.FetchFailingRule();
+            var mockRulePassing = RuleGenerators.FetchPassingRule();
 
             mockRepo.Setup(m => m.FetchAllRules()).Returns(new List<IRule> { mockRuleInError.Object, mockRulePassing.Object });
 
